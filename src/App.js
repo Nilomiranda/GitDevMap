@@ -15,6 +15,7 @@ export default class App extends Component {
         longitude: -122.43,
         zoom: 2,
       },
+      modalOn: false,
     }
   }
 
@@ -38,6 +39,14 @@ export default class App extends Component {
     })
   }
 
+  showModal = () => {
+    if (this.state.modalOn) {
+      this.setState({ modalOn: false })
+    } else {
+      this.setState({ modalOn: true })
+    }
+  }
+
   render() {
     const { viewport } = this.state
     return (
@@ -46,8 +55,9 @@ export default class App extends Component {
         mapboxApiAccessToken="pk.eyJ1IjoiZGFubWlyYW5kYSIsImEiOiJjanZuNHkzMTQxazRyNDhxbGluZ2E4YXpvIn0.8OPQ_CoSC3_dpHM71V0-Lg"
         onViewportChange={newViewport => this.setState({ viewport: newViewport })}
         mapStyle="mapbox://styles/mapbox/basic-v9"
+        onClick={this.showModal}
       >
-        <CardContainer />
+        {this.state.modalOn ? <CardContainer /> : ''}
       </ReactMapGL>
     )
   }
