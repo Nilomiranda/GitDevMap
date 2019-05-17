@@ -49,6 +49,10 @@ export const Card = styled.div`
           width: 50%;
           margin: 0 3px;
           border-radius: 6px;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
 
         button[type='button'] {
