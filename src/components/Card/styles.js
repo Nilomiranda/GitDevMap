@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
 export const Card = styled.div`
+  position: absolute;
   width: inherit;
   height: inherit;
   display: flex;
