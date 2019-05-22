@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ReactMapGL from 'react-map-gl';
+
+// custom components
+import GlobalStyle from './GlobalStyle';
 import CardContainer from './components/Card';
+import UsersList from './components/UsersList';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -56,15 +60,21 @@ export default class App extends Component {
   render() {
     const { viewport } = this.state;
     return (
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken="pk.eyJ1IjoiZGFubWlyYW5kYSIsImEiOiJjanZuNHkzMTQxazRyNDhxbGluZ2E4YXpvIn0.8OPQ_CoSC3_dpHM71V0-Lg"
-        onViewportChange={newViewport => this.setState({ viewport: newViewport })}
-        mapStyle="mapbox://styles/mapbox/basic-v9"
-        onMouseUp={this.showModal}
-      >
-        {this.state.modalOn ? <CardContainer cancel={e => this.cancelEvent(e)} /> : ''}
-      </ReactMapGL>
+      // TODO: FIX mouse click event
+      <Fragment>
+        <GlobalStyle />
+        <ReactMapGL
+          {...viewport}
+          mapboxApiAccessToken="pk.eyJ1IjoiZGFubWlyYW5kYSIsImEiOiJjanZuNHkzMTQxazRyNDhxbGluZ2E4YXpvIn0.8OPQ_CoSC3_dpHM71V0-Lg"
+          onViewportChange={newViewport => this.setState({ viewport: newViewport })}
+          mapStyle="mapbox://styles/mapbox/basic-v9"
+          onMouseUp={this.showModal}
+          className="map-container"
+        >
+          <UsersList />
+          {this.state.modalOn ? <CardContainer cancel={e => this.cancelEvent(e)} /> : ''}
+        </ReactMapGL>
+      </Fragment>
     );
   }
 }
